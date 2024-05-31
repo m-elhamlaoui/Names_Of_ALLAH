@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, questions, setQuestions }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -17,13 +17,16 @@ const Login = ({ setUser }) => {
     });
 
     const data = await response.json();
-    if (data.token) {
+    if (data.token && data.questions) {
       const decodedToken = jwtDecode(data.token);
       localStorage.setItem('user', JSON.stringify(decodedToken));
       localStorage.setItem('token', data.token);
+      console.log(data)
+      setQuestions(data.questions)
       setUser(decodedToken);
       navigate('/quiz');
     } else {
+      console.log(data)
       alert('Invalid credentials');
     }
   };

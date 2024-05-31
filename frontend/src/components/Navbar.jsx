@@ -9,7 +9,7 @@ const Navbar = ({ scrollToSection, user, setUser }) => {
     if (loggedUser) {
       setUser(JSON.parse(loggedUser));
     }
-  }, [user]);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('user');

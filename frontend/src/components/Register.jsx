@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
-const Register = ({ setUser }) => {
+const Register = ({ setUser, questions, setQuestions }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -17,10 +17,11 @@ const Register = ({ setUser }) => {
     });
 
     const data = await response.json();
-    if (data.token) {
+    if (data.token && data.questions) {
       const decodedToken = jwtDecode(data.token);
       localStorage.setItem('user', JSON.stringify(decodedToken));
       localStorage.setItem('token', data.token);
+      setQuestions(data.questions)
       setUser(decodedToken);
       navigate('/quiz');
     } else {
