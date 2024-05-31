@@ -63,22 +63,36 @@ const Quiz = () => {
     };
 
     return (
-        <div className="app">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 border gap-5">
             {showScore ? (
-                <div className="score-section">
-                    You scored {score} out of {questions.length}!
-                    <button onClick={handleRestartButtonClick}>Play Again</button>
+                <div className="bg-white p-8 rounded-lg shadow-md text-center">
+                    <h1 className="text-2xl font-bold mb-4">Quiz Results</h1>
+                    <p className="mb-4">You scored {score} out of {questions.length}!</p>
+                    <button
+                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
+                        onClick={handleRestartButtonClick}
+                    >
+                        Play Again
+                    </button>
                 </div>
             ) : (
-                <div className="quiz-section">
-                    <h1>Quiz about The Names of ALLAH</h1>
-                    <div className="question-section">
-                        <h2 id="question">{questions[currentQuestionIndex].question}</h2>
-                        <div id="answer-buttons">
+                <div className="bg-white p-8 rounded-lg shadow-md">
+                    <h1 className="text-2xl font-bold mb-6">Quiz about The Names of ALLAH</h1>
+                    <div className="mb-4">
+                        <h2 className="text-xl font-semibold mb-4">{questions[currentQuestionIndex].question}</h2>
+                        <div className="flex flex-col space-y-2">
                             {questions[currentQuestionIndex].answers.map((answer, index) => (
                                 <button
                                     key={index}
-                                    className={`btn ${selectedAnswer !== null && answer.correct ? 'correct' : ''} ${selectedAnswer !== null && !answer.correct && selectedAnswer === answer.correct ? 'incorrect' : ''}`}
+                                    className={`py-2 px-4 rounded transition duration-200 ${
+                                        selectedAnswer !== null
+                                            ? answer.correct
+                                                ? 'bg-green-500 text-white'
+                                                : selectedAnswer === answer.correct
+                                                ? 'bg-red-500 text-white'
+                                                : 'bg-gray-200 text-gray-800'
+                                            : 'bg-blue-500 text-white hover:bg-blue-600'
+                                    }`}
                                     onClick={() => handleAnswerButtonClick(answer.correct)}
                                     disabled={selectedAnswer !== null}
                                 >
@@ -87,7 +101,11 @@ const Quiz = () => {
                             ))}
                         </div>
                     </div>
-                    <button id="next-btn" onClick={handleNextButtonClick} disabled={selectedAnswer === null}>
+                    <button
+                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200 mt-4"
+                        onClick={handleNextButtonClick}
+                        disabled={selectedAnswer === null}
+                    >
                         {currentQuestionIndex < questions.length - 1 ? 'Next' : 'Show Score'}
                     </button>
                 </div>

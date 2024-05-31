@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({ scrollToSection }) => {
-  const [user, setUser] = useState(null);
+const Navbar = ({ scrollToSection, user, setUser }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is already logged in when the component mounts
     const loggedUser = localStorage.getItem('user');
     if (loggedUser) {
       setUser(JSON.parse(loggedUser));
     }
-  }, []);
+  }, [user]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
     navigate('/');
   };

@@ -29,31 +29,34 @@ const Register = ({ setUser }) => {
   };
 
   return (
-    <section>
-      <div className="form-box">
-        <div className="form-value">
-          <form onSubmit={handleSubmit}>
-            <h2>Register</h2>
-            <div className="inputbox">
-              <ion-icon name="mail-outline"></ion-icon>
-              <input type="email" required value={username} onChange={(e) => setUsername(e.target.value)} />
-              <label>Username</label>
-            </div>
-            <div className="inputbox">
-              <ion-icon name="lock-closed-outline"></ion-icon>
-              <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
-              <label>Password</label>
-            </div>
-            <button type="submit">Register</button>
-            <div className="register">
-              <p>
-                Already have an account? <a href="/login">Login</a>
-              </p>
-            </div>
-          </form>
+    <div className="w-full h-full flex flex-col justify-center items-center border">
+    <div className="form-value w-[80%] h-[60%] border flex flex-col justify-center items-center py-6 shadow-md rounded-md bg-white">
+      <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center gap-10'>
+        <h2 className='text-2xl'>Register</h2>
+        <div className="flex flex-col justify-start items-start w-max gap-2">
+
+        <div className="flex flex-row gap-2 justify-start items-center">
+          <input type="text" className='border rounded-md w-max' required value={username} onChange={(e) => setUsername(e.target.value)} />
+          <label>Username</label>
         </div>
-      </div>
-    </section>
+        <div className="flex flex-row gap-2 justify-start items-center">
+          <input type="password" className='border rounded-md w-max' required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <label>Password</label>
+        </div>
+        </div>
+        <button type="submit" className='px-4 py-2 rounded-md bg-blue-500 border text-white hover:bg-blue-700'>Register</button>
+        <div className="register">
+          <p>
+            Already have an account
+            
+            
+            ? <a href="/login" className='text-blue-500'>Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
   );
 };
 

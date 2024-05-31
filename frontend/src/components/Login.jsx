@@ -36,11 +36,11 @@ const Login = ({ setUser }) => {
             <h2 className='text-2xl'>Login</h2>
             <div className="flex flex-col justify-start items-start w-max gap-2">
 
-            <div className="flex flex-row gap-2 justify-start">
+            <div className="flex flex-row gap-2 justify-start items-center">
               <input type="text" className='border rounded-md w-max' required value={username} onChange={(e) => setUsername(e.target.value)} />
               <label>Username</label>
             </div>
-            <div className="flex flex-row gap-2 justify-start">
+            <div className="flex flex-row gap-2 justify-start items-center">
               <input type="password" className='border rounded-md w-max' required value={password} onChange={(e) => setPassword(e.target.value)} />
               <label>Password</label>
             </div>

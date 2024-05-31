@@ -49,7 +49,10 @@ app.post('/register', async (req, res) => {
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
 
-        res.status(201).json({ message: 'User registered successfully' });
+        // Create JWT
+        const token = jwt.sign({ id: newUser._id, username: newUser.username }, jwtSecret, { expiresIn: '1h' });
+
+        res.status(201).json({ token });
     } catch (err) {
         res.status(500).json({ message: 'Server error' });
     }
