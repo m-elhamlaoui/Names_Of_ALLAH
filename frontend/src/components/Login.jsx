@@ -1,15 +1,13 @@
 import React from 'react';
-import '../styles/style3.css'
-import '../styles/styles.css'
-import '../styles/stype2.css'
 
-const Register = () => {
+
+const Login = () => {
   return (
     <section>
       <div className="form-box">
         <div className="form-value">
           <form>
-            <h2>Register</h2>
+            <h2>Login</h2>
             <div className="inputbox">
               <ion-icon name="mail-outline"></ion-icon>
               <input type="email" required />
@@ -28,7 +26,7 @@ const Register = () => {
             <button type="submit">Log in</button>
             <div className="register">
               <p>
-                Don't have an account <a href="#">Register</a>
+                Don't have an account <a href="register">Register</a>
               </p>
             </div>
           </form>
@@ -38,4 +36,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

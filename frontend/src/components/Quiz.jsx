@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/style3.css'
-import '../styles/styles.css'
-import '../styles/stype2.css'
+
 const questions = [
     {
         question: "The All-Compassionate, The Beneficent, The One who has plenty of mercy towards the believers and the blasphemers in this world and especially to the believers in the here-after. The Mercy to all.",
