@@ -1,38 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import {jwtDecode} from 'jwt-decode';
 
+const Login = ({ setUser }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-const Login = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+    if (data.token) {
+      const decodedToken = jwtDecode(data.token);
+      localStorage.setItem('user', JSON.stringify(decodedToken));
+      localStorage.setItem('token', data.token);
+      setUser(decodedToken);
+      navigate('/quiz');
+    } else {
+      alert('Invalid credentials');
+    }
+  };
+
   return (
-    <section>
-      <div className="form-box">
-        <div className="form-value">
-          <form>
-            <h2>Login</h2>
-            <div className="inputbox">
-              <ion-icon name="mail-outline"></ion-icon>
-              <input type="email" required />
-              <label>Email</label>
+
+      <div className="w-full h-full flex flex-col justify-center items-center border">
+        <div className="form-value w-[80%] h-[60%] border flex flex-col justify-center items-center py-6 shadow-md rounded-md bg-white">
+          <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center gap-10'>
+            <h2 className='text-2xl'>Login</h2>
+            <div className="flex flex-col justify-start items-start w-max gap-2">
+
+            <div className="flex flex-row gap-2 justify-start">
+              <input type="text" className='border rounded-md w-max' required value={username} onChange={(e) => setUsername(e.target.value)} />
+              <label>Username</label>
             </div>
-            <div className="inputbox">
-              <ion-icon name="lock-closed-outline"></ion-icon>
-              <input type="password" required />
+            <div className="flex flex-row gap-2 justify-start">
+              <input type="password" className='border rounded-md w-max' required value={password} onChange={(e) => setPassword(e.target.value)} />
               <label>Password</label>
             </div>
-            <div className="forget">
-              <label>
-                <input type="checkbox" /> Remember Me <a href="#">Forget Password</a>
-              </label>
             </div>
-            <button type="submit">Log in</button>
+            <button type="submit" className='px-4 py-2 rounded-md bg-blue-500 border text-white hover:bg-blue-700'>Log in</button>
             <div className="register">
               <p>
-                Don't have an account <a href="register">Register</a>
+                Don't have an account? <a href="/register" className='text-blue-500'>Register</a>
               </p>
             </div>
           </form>
         </div>
       </div>
-    </section>
+
   );
 };
 

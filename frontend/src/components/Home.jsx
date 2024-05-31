@@ -22,7 +22,7 @@ const Home = ({ setRefs }) => {
             Prophet Muhammad (ﷺ) said, “Allah has ninety-nine names, i.e. one-hundred minus one, and whoever knows them will go to Paradise.”
           </p>
         </h4>
-        <button className="p-4 border rounded-md">Go to the Quiz</button>
+        <button className="p-4 border rounded-md"> <a href="/quiz">Go to the Quiz</a></button>
       </div>
       <section id="about" ref={aboutRef} className='w-full h-screen'>
         <div className="paragh">

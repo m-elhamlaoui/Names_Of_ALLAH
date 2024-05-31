@@ -2,14 +2,20 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cors = require('cors')
 
 const app = express();
 const PORT = 5000;
-const mongoURI = 'mongodb+srv://choulliimane6:AsZ9NU5OwhW2MWeq@cluster0.jfe5sgq.mongodb.net/dev?retryWrites=true&w=majority&appName=Cluster0'; 
+const mongoURI = 'mongodb+srv://choulliimane6:GgUACcTsQ2ZVdww2@cluster0.jfe5sgq.mongodb.net/dev?retryWrites=true&w=majority&appName=Cluster0'; 
 const jwtSecret = 'your_jwt_secret'; 
 
 
 app.use(express.json());
+app.use(
+    cors({
+        origin:["http://localhost:3000"]
+    })
+)
 
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Quiz from './components/Quiz';
@@ -7,8 +7,16 @@ import Login from './components/Login';
 import Register from './components/Register';
 import './index.css';
 
-function App() {
+const App = () => {
   const [sectionRefs, setSectionRefs] = useState({});
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loggedUser = localStorage.getItem('user');
+    if (loggedUser) {
+      setUser(JSON.parse(loggedUser));
+    }
+  }, [user]);
 
   const scrollToSection = (section) => {
     sectionRefs[section]?.current?.scrollIntoView({ behavior: 'smooth' });
@@ -16,13 +24,13 @@ function App() {
 
   return (
     <Router>
-      <div className="w-screen border h-screen">
-        <Navbar scrollToSection={scrollToSection} />
+      <div className="w-screen border border-black h-screen">
+        <Navbar scrollToSection={scrollToSection} user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<Home setRefs={setSectionRefs} />} />
-          <Route path="/quiz" element={<Quiz />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/quiz" element={user ? <Quiz /> : <Login setUser={setUser} />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
+          <Route path="/register" element={<Register setUser={setUser} />} />
         </Routes>
       </div>
     </Router>
