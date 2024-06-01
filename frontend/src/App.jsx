@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Quiz from './components/Quiz';
@@ -25,7 +25,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="w-screen border border-black h-screen">
+      <div className="w-screen h-screen">
         <Navbar scrollToSection={scrollToSection} user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<Home setRefs={setSectionRefs} />} />

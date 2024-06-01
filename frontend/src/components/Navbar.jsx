@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ scrollToSection, user, setUser }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -9,7 +10,7 @@ const Navbar = ({ scrollToSection, user, setUser }) => {
     if (loggedUser) {
       setUser(JSON.parse(loggedUser));
     }
-  }, []);
+  }, [setUser]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -18,25 +19,37 @@ const Navbar = ({ scrollToSection, user, setUser }) => {
     navigate('/');
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className='w-full border border-black h-[10vh] flex flex-row justify-between items-center px-4 sticky'>
-      <h1><a href="/">Names of ALLAH</a></h1>
-      <ul className='flex flex-row gap-5 w-max items-center'>
-        <li><a href="/" onClick={() => scrollToSection('home')}>Home</a></li>
-        <li><a href="/" onClick={() => scrollToSection('about')}>About</a></li>
-        <li><a href="/" onClick={() => scrollToSection('contact')}>Contact us</a></li>
+    <nav className="w-full border border-black h-[10vh] flex flex-row justify-between items-center px-4 bg-white">
+      <h1 className=''><a href="/">Names of ALLAH</a></h1>
+      
+      <ul className={`flex-col md:flex-row gap-5 w-full md:w-max items-center md:top-0 absolute top-[10vh] left-0 md:relative bg-white md:bg-transparent md:flex ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <li className="cursor-pointer" onClick={() => scrollToSection('home')}>Home</li>
+        <li className="cursor-pointer" onClick={() => scrollToSection('about')}>About</li>
+        <li className="cursor-pointer" onClick={() => scrollToSection('contact')}>Contact us</li>
         {user ? (
           <>
-            <li className='p-4 rounded-md border'><a href="/quiz">Go to the Quiz</a></li>
-            <li className='p-4 rounded-md border'><button onClick={handleLogout}>Logout</button></li>
+            <li className="md:p-4 md:rounded-md md:border cursor-pointer"><a href="/quiz">Go to the Quiz</a></li>
+            <li className="md:p-4 md:rounded-md md:border cursor-pointer"><button onClick={handleLogout}>Logout</button></li>
           </>
         ) : (
-          <div className='flex flex-row w-max gap-5'>
-            <li className='p-4 rounded-md border'><a href="/login">Login</a></li>
-            <li className='p-4 rounded-md border'><a href="/register">Register</a></li>
+          <div className="flex flex-col md:flex-row md:gap-5">
+            <li className="md:p-4 md:rounded-md md:border cursor-pointer"><a href="/login">Login</a></li>
+            <li className="md:p-4 md:rounded-md md:border cursor-pointer"><a href="/register">Register</a></li>
           </div>
         )}
       </ul>
+      <div className="block md:hidden">
+        <button onClick={toggleMenu} className="focus:outline-none">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
     </nav>
   );
 };

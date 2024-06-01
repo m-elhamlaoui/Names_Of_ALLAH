@@ -21,6 +21,7 @@ const Quiz = ({ questions, user }) => {
                 setQuestionsNumber(3);
                 setMyQuestions(null);
             } else {
+                setScore(user.score);
                 setMyQuestions(questions);
                 setQuestionsNumber(questions.length);
             }
@@ -94,7 +95,15 @@ const Quiz = ({ questions, user }) => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 border gap-5">
-            {showScore === true ? (
+            <header className="w-full bg-white shadow-md py-4 px-8 mb-5">
+                <div className="flex justify-between items-center">
+                    <h1 className="text-2xl font-bold">Quiz about The Names of ALLAH</h1>
+                    <div className="text-xl font-semibold">
+                        Score: {score} | Remaining Questions: {questionsNumber - currentQuestionIndex - 1}
+                    </div>
+                </div>
+            </header>
+            {showScore ? (
                 <div className="bg-white p-8 rounded-lg shadow-md text-center">
                     <h1 className="text-2xl font-bold mb-4">Quiz Results</h1>
                     <p className="mb-4">You scored {score} out of {questionsNumber}!</p>
@@ -108,7 +117,6 @@ const Quiz = ({ questions, user }) => {
             ) : (
                 myQuestions && myQuestions.length > 0 && (
                     <div className="bg-white p-8 rounded-lg shadow-md">
-                        <h1 className="text-2xl font-bold mb-6">Quiz about The Names of ALLAH</h1>
                         <div className="mb-4">
                             <h2 className="text-xl font-semibold mb-4">{myQuestions[currentQuestionIndex].question}</h2>
                             <div className="flex flex-col space-y-2">

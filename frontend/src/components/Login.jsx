@@ -25,7 +25,6 @@ const Login = ({ setUser, questions, setQuestions }) => {
       setUser(decodedToken);
       navigate('/quiz');
     } else {
-      console.log(data)
       alert('Invalid credentials');
     }
   };
