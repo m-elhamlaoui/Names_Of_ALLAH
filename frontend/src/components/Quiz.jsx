@@ -5,25 +5,32 @@ const Quiz = ({ questions, user }) => {
     const [score, setScore] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [myQuestions, setMyQuestions] = useState(null)
-    const[userToken, setUserToken] = useState(null)
+    const [myQuestions, setMyQuestions] = useState(null);
+    const [userToken, setUserToken] = useState(null);
+    const [questionsNumber, setQuestionsNumber] = useState(0);
 
     useEffect(() => {
         setSelectedAnswer(null);
     }, [currentQuestionIndex]);
 
-    useEffect(()=>{
-        if(questions){
-            setMyQuestions(questions)
+    useEffect(() => {
+        if (questions) {
+            if (questions.length === 0) {
+                setShowScore(true);
+                setScore(user.score);
+                setQuestionsNumber(3);
+                setMyQuestions(null);
+            } else {
+                setMyQuestions(questions);
+                setQuestionsNumber(questions.length);
+            }
         }
+    }, [questions]);
 
-    }, [questions])
-
-    useEffect(()=>{
+    useEffect(() => {
         const token = localStorage.getItem('token');
-        setUserToken(token)
-
-    }, [user])
+        setUserToken(token);
+    }, [user]);
 
     const handleAnswerButtonClick = async (isCorrect, questionId) => {
         if (isCorrect) {
@@ -40,14 +47,13 @@ const Quiz = ({ questions, user }) => {
                 },
                 body: JSON.stringify({ questionId, isCorrect, id: user.id })
             });
-        
+
             if (!response.ok) {
                 throw new Error('Error updating user data');
             }
         } catch (error) {
             console.error("Error updating user data:", error);
         }
-        
     };
 
     const handleNextButtonClick = () => {
@@ -59,18 +65,39 @@ const Quiz = ({ questions, user }) => {
         }
     };
 
-    const handleRestartButtonClick = () => {
+    const handleRestartButtonClick = async () => {
         setScore(0);
         setCurrentQuestionIndex(0);
         setShowScore(false);
+
+        try {
+            const response = await fetch('http://localhost:5000/reset-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userToken}`
+                },
+                body: JSON.stringify({ id: user.id })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error resetting user data');
+            }
+
+            // Optionally, you can reload the questions here
+            const data = await response.json();
+            setMyQuestions(data.questions);
+        } catch (error) {
+            console.error("Error resetting user data:", error);
+        }
     };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 border gap-5">
-            {showScore ? (
+            {showScore === true ? (
                 <div className="bg-white p-8 rounded-lg shadow-md text-center">
                     <h1 className="text-2xl font-bold mb-4">Quiz Results</h1>
-                    <p className="mb-4">You scored {score} out of {myQuestions.length}!</p>
+                    <p className="mb-4">You scored {score} out of {questionsNumber}!</p>
                     <button
                         className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
                         onClick={handleRestartButtonClick}

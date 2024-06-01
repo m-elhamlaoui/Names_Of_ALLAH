@@ -21,7 +21,6 @@ const Login = ({ setUser, questions, setQuestions }) => {
       const decodedToken = jwtDecode(data.token);
       localStorage.setItem('user', JSON.stringify(decodedToken));
       localStorage.setItem('token', data.token);
-      console.log(data)
       setQuestions(data.questions)
       setUser(decodedToken);
       navigate('/quiz');

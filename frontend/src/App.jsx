@@ -29,7 +29,7 @@ const App = () => {
         <Navbar scrollToSection={scrollToSection} user={user} setUser={setUser} />
         <Routes>
           <Route path="/" element={<Home setRefs={setSectionRefs} />} />
-          <Route path="/quiz" element={user ? <Quiz user={user} questions={questions} setQuestions={(value)=>setQuestions(value)}/> : <Login setUser={setUser} />} />
+          <Route path="/quiz" element={user ? <Quiz user={user} questions={questions} setQuestions={(value)=>setQuestions(value)}/> : <Login setUser={setUser} setQuestions={(value)=>setQuestions(value)}/>} />
           <Route path="/login" element={<Login setUser={setUser} questions={questions} setQuestions={(value)=>setQuestions(value)} />} />
           <Route path="/register" element={<Register setUser={setUser} questions={questions} setQuestions={(value)=>setQuestions(value)} />} />
         </Routes>

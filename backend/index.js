@@ -56,7 +56,7 @@ app.post('/register', async (req, res) => {
         const newUser = new User({ username, password: hashedPassword, resolvedQuestions:[] });
         await newUser.save();
         const allQuestions = await Question.find();
-        const token = jwt.sign({ id: newUser._id, username: newUser.username }, jwtSecret, { expiresIn: '1h' });
+        const token = jwt.sign({ id: newUser._id, username: newUser.username, score:newUser.score }, jwtSecret, { expiresIn: '1h' });
 
         res.status(201).json({ token, questions:allQuestions });
     } catch (err) {
@@ -80,7 +80,7 @@ app.post('/login', async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ id: user._id, username: user.username }, jwtSecret, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, username: user.username, score:user.score }, jwtSecret, { expiresIn: '1h' });
 
         const resolvedQuestionIds = user.resolvedQuestions ? user.resolvedQuestions.map(q => q._id.toString()) : [];
         const allQuestions = await Question.find({_id:{$nin:resolvedQuestionIds}});
@@ -144,6 +144,22 @@ app.post('/update-user', auth, async (req, res) => {
         res.json({ message: 'User updated successfully' });
     } catch (err) {
         console.error(err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+app.post('/reset-user', auth, async (req, res) => {
+    const { id } = req.body;
+
+    try {
+        // Reset the user's resolved questions and score
+        await User.findByIdAndUpdate(id, { resolvedQuestions: [], score: 0 });
+
+        // Retrieve new questions
+        const allQuestions = await Question.find({});
+        res.json({ questions: allQuestions });
+
+    } catch (err) {
         res.status(500).json({ message: 'Server error' });
     }
 });
