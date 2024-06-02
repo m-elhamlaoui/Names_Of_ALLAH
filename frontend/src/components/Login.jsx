@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
+import './style1.css';
 
 const Login = ({ setUser, questions, setQuestions }) => {
   const [username, setUsername] = useState('');
@@ -30,18 +31,20 @@ const Login = ({ setUser, questions, setQuestions }) => {
   };
 
   return (
+    <div  className="w-full flex flex-col justify-center items-center h-screen bg-ph6 bg-cover bg-center">
+      <section>
 
-      <div className="w-full h-full flex flex-col justify-center items-center border">
-        <div className="form-value w-[80%] h-[60%] border flex flex-col justify-center items-center py-6 shadow-md rounded-md bg-white">
+      <div className="form-box">
+        <div className="form-value">
           <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center gap-10'>
             <h2 className='text-2xl'>Login</h2>
             <div className="flex flex-col justify-start items-start w-max gap-2">
 
-            <div className="flex flex-row gap-2 justify-start items-center">
+            <div className="inputbox">
               <input type="text" className='border rounded-md w-max' required value={username} onChange={(e) => setUsername(e.target.value)} />
               <label>Username</label>
             </div>
-            <div className="flex flex-row gap-2 justify-start items-center">
+            <div className="inputbox">
               <input type="password" className='border rounded-md w-max' required value={password} onChange={(e) => setPassword(e.target.value)} />
               <label>Password</label>
             </div>
@@ -54,7 +57,10 @@ const Login = ({ setUser, questions, setQuestions }) => {
             </div>
           </form>
         </div>
+        </div>
+        </section>
       </div>
+      
 
   );
 };

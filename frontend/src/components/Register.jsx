@@ -30,6 +30,7 @@ const Register = ({ setUser, questions, setQuestions }) => {
   };
 
   return (
+    <div  className="w-full flex flex-col justify-center items-center h-screen bg-ph6 bg-cover bg-center">
     <div className="w-full h-full flex flex-col justify-center items-center border">
     <div className="form-value w-[80%] h-[60%] border flex flex-col justify-center items-center py-6 shadow-md rounded-md bg-white">
       <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center gap-10'>
@@ -56,6 +57,7 @@ const Register = ({ setUser, questions, setQuestions }) => {
         </div>
       </form>
     </div>
+  </div>
   </div>
 
   );

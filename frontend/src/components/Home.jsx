@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import './style.css'
 
 const Home = ({ setRefs }) => {
   const homeRef = useRef(null);
@@ -14,15 +15,18 @@ const Home = ({ setRefs }) => {
   }, [setRefs]);
 
   return (
-    <div className="w-full h-max flex flex-col ">
-      <div id='home' ref={homeRef} className="w-full flex flex-col justify-center items-center h-screen bg-home bg-cover bg-center">
-        <h4 className='text-white text-xl font-bold'>
+    <div className="content">  
+      <div id='home' ref={homeRef} >
+        <div className='B'>
+        <h4 >
           "يقول ﷺ:  "إن لله تسعة وتسعين اسمًا، من أحصاها دخل الجنة
           <p>
             Prophet Muhammad (ﷺ) said, “Allah has ninety-nine names, i.e. one-hundred minus one, and whoever knows them will go to Paradise.”
           </p>
+         
         </h4>
-        <button className="p-4 border rounded-md"> <a href="/quiz">Go to the Quiz</a></button>
+        </div>
+        <button className="btn"> <a href="/quiz">Go to the Quiz</a></button>
       </div>
       <section id="about" ref={aboutRef} className='w-full h-screen'>
         <div className="paragh">
@@ -38,7 +42,7 @@ const Home = ({ setRefs }) => {
           </p>
         </div>
       </section>
-      <section id="contact" ref={contactRef} className='w-full h-screen border border-red-500'>
+      <section id="contact" ref={contactRef} className=' '>
         <div className="contact-container">
           <form action="https://api.web3forms.com/submit" method="POST" className="contact-left">
             <div className="contact-left-title">
