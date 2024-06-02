@@ -36,7 +36,7 @@ const Login = ({ setUser, questions, setQuestions }) => {
 
       <div className="form-box">
         <div className="form-value">
-          <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center gap-10'>
+          <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center '>
             <h2 className='text-2xl'>Login</h2>
             <div className="flex flex-col justify-start items-start w-max gap-2">
 
