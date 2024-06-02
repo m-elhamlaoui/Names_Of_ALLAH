@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+import './style1.css';
 
 const Register = ({ setUser, questions, setQuestions }) => {
   const [username, setUsername] = useState('');
@@ -21,7 +22,7 @@ const Register = ({ setUser, questions, setQuestions }) => {
       const decodedToken = jwtDecode(data.token);
       localStorage.setItem('user', JSON.stringify(decodedToken));
       localStorage.setItem('token', data.token);
-      setQuestions(data.questions)
+      setQuestions(data.questions);
       setUser(decodedToken);
       navigate('/quiz');
     } else {
@@ -30,36 +31,33 @@ const Register = ({ setUser, questions, setQuestions }) => {
   };
 
   return (
-    <div  className="w-full flex flex-col justify-center items-center h-screen bg-ph6 bg-cover bg-center">
-    <div className="w-full h-full flex flex-col justify-center items-center border">
-    <div className="form-value w-[80%] h-[60%] border flex flex-col justify-center items-center py-6 shadow-md rounded-md bg-white">
-      <form onSubmit={handleSubmit} className='w-full h-full flex flex-col justify-center items-center gap-10'>
-        <h2 className='text-2xl'>Register</h2>
-        <div className="flex flex-col justify-start items-start w-max gap-2">
-
-        <div className="flex flex-row gap-2 justify-start items-center">
-          <input type="text" className='border rounded-md w-max' required value={username} onChange={(e) => setUsername(e.target.value)} />
-          <label>Username</label>
+    <div className="w-full flex justify-center items-center h-screen bg-ph6 bg-cover bg-center">
+      <section>
+        <div className="form-box">
+          <div className="form-value">
+            <form onSubmit={handleSubmit} className="w-full h-full flex flex-col justify-center items-center">
+              <h2 className="text-2xl">Register</h2>
+              <div className="flex flex-col justify-start items-start w-max gap-2">
+                <div className="inputbox">
+                  <input type="text" className="border rounded-md w-max" required value={username} onChange={(e) => setUsername(e.target.value)} />
+                  <label>Username</label>
+                </div>
+                <div className="inputbox">
+                  <input type="password" className="border rounded-md w-max" required value={password} onChange={(e) => setPassword(e.target.value)} />
+                  <label>Password</label>
+                </div>
+              </div>
+              <button type="submit" className="px-4 py-2 rounded-md bg-blue-500 border text-white hover:bg-blue-700">Register</button>
+              <div className="register">
+                <p>
+                  Already have an account? <a href="/login" className="text-blue-500">Login</a>
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="flex flex-row gap-2 justify-start items-center">
-          <input type="password" className='border rounded-md w-max' required value={password} onChange={(e) => setPassword(e.target.value)} />
-          <label>Password</label>
-        </div>
-        </div>
-        <button type="submit" className='px-4 py-2 rounded-md bg-blue-500 border text-white hover:bg-blue-700'>Register</button>
-        <div className="register">
-          <p>
-            Already have an account
-            
-            
-            ? <a href="/login" className='text-blue-500'>Login</a>
-          </p>
-        </div>
-      </form>
+      </section>
     </div>
-  </div>
-  </div>
-
   );
 };
 
