@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './style3.css';
-import img from '../assets/images/pho5.jpg'
 
 const Quiz = ({ questions, user }) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -96,32 +94,31 @@ const Quiz = ({ questions, user }) => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 border gap-5 bg-cover" style={{ backgroundImage: `url(${img})` }}>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 border gap-5">
             <header className="w-full bg-white shadow-md py-4 px-8 mb-5">
-          
                 <div className="flex justify-between items-center">
-                    <h1 className="text-2xl font-bold">Quiz sur les noms d'ALLAH</h1>
+                    <h1 className="text-2xl font-bold">Quiz about The Names of ALLAH</h1>
                     <div className="text-xl font-semibold">
-                        Score: {score} | Questions restantes: {questionsNumber - currentQuestionIndex - 1}
+                        Score: {score} | Remaining Questions: {questionsNumber - currentQuestionIndex - 1}
                     </div>
                 </div>
             </header>
             {showScore ? (
                 <div className="bg-white p-8 rounded-lg shadow-md text-center">
-                    <h1 className="text-2xl font-bold mb-4">Résultats du Quiz</h1>
-                    <p className="mb-4">Vous avez obtenu {score} sur {questionsNumber}!</p>
+                    <h1 className="text-2xl font-bold mb-4">Quiz Results</h1>
+                    <p className="mb-4">You scored {score} out of {questionsNumber}!</p>
                     <button
                         className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
                         onClick={handleRestartButtonClick}
                     >
-                        Jouer à nouveau
+                        Play Again
                     </button>
                 </div>
             ) : (
                 myQuestions && myQuestions.length > 0 && (
                     <div className="bg-white p-8 rounded-lg shadow-md">
                         <div className="mb-4">
-                            <h2 className="text-xl font-semibold mb-4 text-black">{myQuestions[currentQuestionIndex].question}</h2>
+                            <h2 className="text-xl font-semibold mb-4">{myQuestions[currentQuestionIndex].question}</h2>
                             <div className="flex flex-col space-y-2">
                                 {myQuestions[currentQuestionIndex].answers.map((answer, index) => (
                                     <button
@@ -148,7 +145,7 @@ const Quiz = ({ questions, user }) => {
                             onClick={handleNextButtonClick}
                             disabled={selectedAnswer === null}
                         >
-                            {currentQuestionIndex < myQuestions.length - 1 ? 'Suivant' : 'Afficher le score'}
+                            {currentQuestionIndex < myQuestions.length - 1 ? 'Next' : 'Show Score'}
                         </button>
                     </div>
                 )
