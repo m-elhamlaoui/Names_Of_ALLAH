@@ -1,7 +1,7 @@
  # Names Of ALLAH
 Bienvenue sur notre site web qui a pour but d'aider les utilisateurs à apprendre et mémoriser les 99 noms d'Allah.
 ## Table de matière
-* [Membres d'équipes](#Membres-d'équipes)
+* [Membres d'équipes](#membres-d-équipes)
 * [Introduction](#introduction)
 * [Fonctionnalités](#fonctionnalités)
 * [Technologies utilisées](#technologies-utilisées)
@@ -11,7 +11,8 @@ Bienvenue sur notre site web qui a pour but d'aider les utilisateurs à apprendr
 * [Installation](#installation)
 * [Utilisation](#utilisation)
 * [Contribution](#contribution)
-* [Démo_vidéo_de_l_application](#Démo_vidéo_de_l_application)
+* [Démo vidéo de l application](#démo-vidéo-de-l-application)
+
 
 
 ## Membres d'équipes
@@ -56,7 +57,7 @@ Pour installer et exécuter ce projet localement, suivez ces étapes :
 
 2. **Accédez au répertoire du projet :**
     ```bash
-    cd Names-of-ALLAH
+    cd frontend
     ```
 
 3. **Installez les dépendances nécessaires :**
@@ -105,6 +106,17 @@ Nous accueillons avec plaisir les contributions de la communauté ! Pour contrib
 
 Merci d'utiliser notre site web de quiz des noms d'Allah. Nous espérons qu'il vous sera utile pour approfondir vos connaissances et votre compréhension des noms d'Allah.
 
+## Démo vidéo de l'application:
+
+**SITE Names of ALLAH:**
+
+https://drive.google.com/file/d/1MWHI0IXFzDXZmpf77KS3yo-EcBVHs1JE/view?usp=sharing
+
+**MongoDB:**
+
+https://drive.google.com/file/d/1UTjBYzbvBScOQv1gFa5PySsnv9HjyW1M/view?usp=sharing
+
+
 ## Diagramme de Cas d'Utilisation
 
 ```plaintext
@@ -135,4 +147,6 @@ Merci d'utiliser notre site web de quiz des noms d'Allah. Nous espérons qu'il v
 |   - Enregistrer Scores    |
 |   - Générer Rapports      |
 +---------------------------+
+
+
 
